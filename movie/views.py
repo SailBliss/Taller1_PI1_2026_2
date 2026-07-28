@@ -14,7 +14,7 @@ def home(request):
         request,
         "home.html",
         {
-            "name": "Isabella Hernández Posada",
+            "name": "Isabela Ruiz de la Ossa",
             "searchTerm": search_term,
             "movies": movies,
         },
