@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Movie Reviews</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="container py-4">
     <h1>Welcome to Home Page, {{ name }}</h1>
     <h2>Movie Reviews</h2>
 
@@ -16,7 +17,7 @@
             <input type="text" id="searchMovie" name="searchMovie" value="{{ searchTerm|default_if_none:'' }}">
         </div>
 
-        <button type="submit">Search</button>
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
 
     {% if searchTerm %}
