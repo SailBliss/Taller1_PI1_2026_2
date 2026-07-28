@@ -8,7 +8,41 @@
 
 <body>
     <h1>Welcome to Home Page, {{ name }}</h1>
-    <h2>This is the full home page</h2>
+    <h2>Movie Reviews</h2>
+
+    <form method="get" action="">
+        <div>
+            <label for="searchMovie">Search for Movie:</label>
+            <input type="text" id="searchMovie" name="searchMovie" value="{{ searchTerm|default_if_none:'' }}">
+        </div>
+
+        <button type="submit">Search</button>
+    </form>
+
+    {% if searchTerm %}
+    <p>Searching for: {{ searchTerm }}</p>
+    {% else %}
+    <p>Showing all movies</p>
+    {% endif %}
+
+    {% for movie in movies %}
+    <article>
+        <h2>{{ movie.title }}</h2>
+        <p>{{ movie.description }}</p>
+
+        <img src="{{ movie.image.url }}" alt="{{ movie.title }}" width="300">
+
+        {% if movie.url %}
+        <p>
+            <a href="{{ movie.url }}">Movie Link</a>
+        </p>
+        {% endif %}
+    </article>
+
+    <hr>
+    {% empty %}
+    <p>No movies found.</p>
+    {% endfor %}
 </body>
 
 </html>

@@ -1,12 +1,23 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Movie
 
 
 def home(request):
+    search_term = request.GET.get("searchMovie")
+
+    if search_term:
+        movies = Movie.objects.filter(title__icontains=search_term)
+    else:
+        movies = Movie.objects.all()
+
     return render(
         request,
         "home.html",
-        {"name": "Isabela Ruiz de la Ossa"},
+        {
+            "name": "Isabella Hernández Posada",
+            "searchTerm": search_term,
+            "movies": movies,
+        },
     )
 
 
