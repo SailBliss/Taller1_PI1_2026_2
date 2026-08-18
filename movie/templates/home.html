@@ -12,7 +12,7 @@
     <h2>Movie Reviews</h2>
 
     <form method="get" action="">
-        <div>
+        <div class="mb-3">
             <label for="searchMovie">Search for Movie:</label>
             <input type="text" id="searchMovie" name="searchMovie" value="{{ searchTerm|default_if_none:'' }}">
         </div>
@@ -26,24 +26,33 @@
     <p>Showing all movies</p>
     {% endif %}
 
-    {% for movie in movies %}
-    <article>
-        <h2>{{ movie.title }}</h2>
-        <p>{{ movie.description }}</p>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for movie in movies %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.title }}">
 
-        <img src="{{ movie.image.url }}" alt="{{ movie.title }}" width="300">
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.title }}</h5>
 
-        {% if movie.url %}
-        <p>
-            <a href="{{ movie.url }}">Movie Link</a>
-        </p>
-        {% endif %}
-    </article>
+                    <p class="card-text">
+                        {{ movie.description }}
+                    </p>
 
-    <hr>
-    {% empty %}
-    <p>No movies found.</p>
-    {% endfor %}
+                    {% if movie.url %}
+                    <a href="{{ movie.url }}" class="btn btn-primary">
+                        Movie Link
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% empty %}
+        <p>No movies found.</p>
+        {% endfor %}
+    </div>
+
 </body>
 
 </html>
